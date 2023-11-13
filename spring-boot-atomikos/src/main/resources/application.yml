@@ -1,0 +1,58 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+      show-sql: true
+      properties:
+        hibernate:
+          format_sql: true
+  jta:
+    atomikos:
+      connectionfactory:
+        ibmmq:
+          unique-resource-name: ibmmq
+          xa-connection-factory-class-name: com.ibm.mq.jakarta.jms.MQXAConnectionFactory
+          xa-properties:
+            queueManager: ibmmq
+            channel: DEV.ADMIN.SVRCONN
+            hostName: localhost
+            port: 32501
+            transportType: 1
+            # user: admin
+            # password: passw0rd
+          max-pool-size: 1
+          min-pool-size: 1
+      datasource:
+        postgres:
+          unique-resource-name: postgres
+          xa-data-source-class-name: org.postgresql.xa.PGXADataSource
+          xa-properties:
+            serverName: localhost
+            portNumber: 30001
+            databaseName: postgresdb
+            user: admin
+            password: test123
+          max-pool-size: 1
+          min-pool-size: 1
+
+#spring.datasource.url=jdbc:postgresql://localhost:30001/postgresdb
+#spring.datasource.username=admin
+#spring.datasource.password=test123
+
+#spring.jpa.hibernate.ddl-auto=update
+#spring.jpa.show-sql=true
+#spring.jpa.properties.hibernate.format_sql=true
+
+#logging.level.org.hibernate.SQL=DEBUG
+
+#logging.level.root=DEBUG
+#logging.level.com.atomikos=DEBUG
+
+
+#ibm:
+#  mq:
+#    queueManager: ibmmq
+#    channel: DEV.ADMIN.SVRCONN
+#    connName: localhost(32501)
+#    user: admin
+#    password: passw0rd
