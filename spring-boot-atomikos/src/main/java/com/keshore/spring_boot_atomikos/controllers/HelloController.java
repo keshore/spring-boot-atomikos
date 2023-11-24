@@ -27,15 +27,24 @@ public class HelloController {
 	@Transactional
 	public String index() {
 		City c = new City();
+		jmsTemplate.convertAndSend("DEV.QUEUE.1", "Hello");
 		c = cityRepo.save(c);
-		System.out.println(jmsTemplate.getConnectionFactory().getClass());
-		jmsTemplate.convertAndSend("DEV.QUEUE.1", c.getId());
-//		System.out.println(1 / 0);
+		return "Greetings from Spring Boot!. saved city. id: " + c.getId() + dataSourceProperties.getUrl();
+	}
+	
+	@GetMapping("/err")
+	@Transactional
+	public String err() {
+		City c = new City();
+		jmsTemplate.convertAndSend("DEV.QUEUE.1", "Hello");
+		c = cityRepo.save(c);
+		System.out.println(1 / 0);
 		return "Greetings from Spring Boot!. saved city. id: " + c.getId() + dataSourceProperties.getUrl();
 	}
 
 	@GetMapping("recv")
-	String recv() {
+	@Transactional
+	public String recv() {
 		try {
 			return jmsTemplate.receiveAndConvert("DEV.QUEUE.1").toString();
 		} catch (JmsException ex) {

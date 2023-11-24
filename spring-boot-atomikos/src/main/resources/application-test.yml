@@ -10,7 +10,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:30001/postgres
     username: postgres
-    password: Y9Fn7HQCa4
+    password: Yx9IQNt2CV
 
   jta:
     atomikos:
@@ -19,10 +19,11 @@ spring:
       datasource:
         max-pool-size: 3
 
-#logging.level.org.hibernate.SQL=DEBUG
-
-#logging.level.root=DEBUG
-#logging.level.com.atomikos=DEBUG
+#logging:
+#  level:
+#    root: DEBUG
+#    com.atomikos: DEBUG
+#    org.hibernate.SQL: DEBUG
 
 
 ibm:
